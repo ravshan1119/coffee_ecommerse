@@ -89,7 +89,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ["price"],
                                         )));
                           },
-                          child: const ProductCard()),
+                          child: ProductCard(
+                            price: snapshot.data!.docs[index]["price"],
+                            name: snapshot.data!.docs[index]["name"],
+                            description: snapshot.data!.docs[index]
+                                ["description"],
+                          )),
                     ),
                   ),
                 ],

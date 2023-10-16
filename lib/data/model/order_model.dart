@@ -5,13 +5,18 @@ class OrderModel {
   String name;
   String number;
   String location;
+  String coffeeName;
+  String coffeePrice;
 
   OrderModel(
       {
         required this.id,
         required this.name,
         required this.number,
-        required this.location,});
+        required this.location,
+        required this.coffeeName,
+        required this.coffeePrice,
+      });
 
   @override
   String toString() {
@@ -23,6 +28,8 @@ class OrderModel {
     name: json['title'] as String? ?? "",
     location: json['location'] as String? ?? "",
     number: json["number"] as String? ?? "",
+    coffeeName: json["coffee_name"] as String? ?? "",
+    coffeePrice: json["coffee_price"] as String? ?? "",
   );
 
   Map<String, dynamic> toJson() => {
@@ -30,6 +37,8 @@ class OrderModel {
     'name': name,
     'number': number,
     'location': location,
+    'coffee_price': coffeePrice,
+    'coffee_name': coffeeName,
   };
 
   OrderModel copyWith({
@@ -37,12 +46,16 @@ class OrderModel {
     String? name,
     String? number,
     String? location,
+    String? coffeeName,
+    String? coffeePrice,
   }) {
     return OrderModel(
       id: id ?? this.id,
       name: name ?? this.name,
       number: number ?? this.number,
       location: location ?? this.location,
+      coffeeName: coffeeName ?? this.coffeeName,
+      coffeePrice: coffeePrice ?? this.coffeePrice,
     );
   }
 }

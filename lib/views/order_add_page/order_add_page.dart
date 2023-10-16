@@ -13,7 +13,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 class OrderAddPage extends StatefulWidget {
-  const OrderAddPage({super.key});
+  const OrderAddPage({super.key, required this.coffeeName, required this.coffeePrice});
+  final String coffeeName;
+  final String coffeePrice;
 
   @override
   State<OrderAddPage> createState() => _OrderAddPageState();
@@ -94,6 +96,8 @@ class _OrderAddPageState extends State<OrderAddPage> {
                           name: nameController.text,
                           number: numberController.text,
                           location: locationController.text,
+                          coffeePrice: widget.coffeePrice,
+                          coffeeName: widget.coffeeName,
                         );
 
                         showLoading(context: context);

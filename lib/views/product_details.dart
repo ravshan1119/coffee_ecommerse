@@ -21,7 +21,7 @@ class ProducDetailsScreen extends StatelessWidget {
       body: Stack(children: [
         Image.network(
             'https://media.istockphoto.com/photos/cup-of-cafe-latte-with-coffee-beans-and-cinnamon-sticks-picture-id505168330?b=1&k=20&m=505168330&s=170667a&w=0&h=jJTePtpYZLR3M2OULX5yoARW7deTuAUlwpAoS4OriJg=',
-            height: MediaQuery.of(context).size.height * 0.8,
+            height: MediaQuery.of(context).size.height / 1.9,
             width: double.infinity,
             fit: BoxFit.cover),
         DraggableScrollableSheet(
@@ -104,8 +104,7 @@ class ProducDetailsScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(
                           left: 30.0, top: 10, bottom: 10, right: 30),
-                      child: Text(
-                          description,
+                      child: Text(description,
                           textAlign: TextAlign.justify,
                           style: const TextStyle(
                               color: AppTheme.darkColor,
@@ -117,7 +116,9 @@ class ProducDetailsScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const OrderAddPage()));
+                                builder: (context) => OrderAddPage(
+                                    coffeeName: name,
+                                    coffeePrice: price.toString())));
                       },
                       price: price,
                     ),
@@ -135,16 +136,20 @@ class ProducDetailsScreen extends StatelessWidget {
                 color: Colors.black,
               ),
             )),
-        const Positioned(
+        Positioned(
             top: 25,
             left: 15,
             child: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: Icon(
-                Icons.arrow_back,
-                color: Colors.black,
-              ),
-            ))
+                backgroundColor: Colors.white,
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.black,
+                  ),
+                )))
       ]),
     );
   }

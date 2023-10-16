@@ -81,4 +81,18 @@ class CoffeeService {
       return UniversalData(error: error.toString());
     }
   }
+  Future<UniversalData> deleteOrder({required String productId}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection("orders")
+          .doc(productId)
+          .delete();
+
+      return UniversalData(data: "Order deleted!");
+    } on FirebaseException catch (e) {
+      return UniversalData(error: e.code);
+    } catch (error) {
+      return UniversalData(error: error.toString());
+    }
+  }
 }

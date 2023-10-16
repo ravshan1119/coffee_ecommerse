@@ -28,10 +28,8 @@ class _CoffeeAddPageState extends State<CoffeeAddPage> {
   CoffeeService coffeeService = CoffeeService();
 
   ImagePicker pickerOne = ImagePicker();
-  ImagePicker pickerTwo = ImagePicker();
 
   File? _photo;
-  File? _photoTwo;
 
   var storage = FirebaseStorage.instance;
 
@@ -39,7 +37,6 @@ class _CoffeeAddPageState extends State<CoffeeAddPage> {
   void initState() {
     super.initState();
     _photo != null;
-    _photoTwo != null;
   }
 
   @override
@@ -170,6 +167,10 @@ class _CoffeeAddPageState extends State<CoffeeAddPage> {
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
+
+                      nameController.clear();
+                      descriptionController.clear();
+                      priceController.clear();
                     },
                     color: Colors.greenAccent.shade200,
                   ),
@@ -220,7 +221,6 @@ class _CoffeeAddPageState extends State<CoffeeAddPage> {
       debugPrint('error occured');
     }
   }
-
 
   void _showPicker(context) {
     showModalBottomSheet(

@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:coffee_ecommerse/data/firebase/coffee_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class OrdersPage extends StatefulWidget {
   const OrdersPage({super.key});
@@ -39,9 +41,42 @@ class _OrdersPageState extends State<OrdersPage> {
           children: snapshot.data!.docs.map((DocumentSnapshot document) {
             Map<String, dynamic> data =
                 document.data()! as Map<String, dynamic>;
-            return ListTile(
-              title: Text(data['name']),
-              subtitle: Text(data['number']),
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Slidable(
+                startActionPane:
+                    ActionPane(motion: const BehindMotion(), children: [
+                  SlidableAction(
+                    onPressed: (context) {
+                      CoffeeService().deleteOrder(productId: data["id"]);
+                    },
+                    backgroundColor: Colors.red,
+                    icon: Icons.delete,
+                    label: "delete",
+                  )
+                ]),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.green),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: ListTile(
+                      title: Text(data['name']),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(data['number']),
+                          Text("coffee: ${data['coffee_name']}"),
+                          Text("price: ${data['coffee_price']}"),
+                        ],
+                      ),
+                      trailing: Text(data["location"]),
+                    ),
+                  ),
+                ),
+              ),
             );
           }).toList(),
         );
