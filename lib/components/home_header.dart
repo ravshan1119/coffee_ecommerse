@@ -4,8 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class Header extends StatelessWidget {
   const Header({
-    Key? key,
+    Key? key, required this.onTap,
   }) : super(key: key);
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +31,12 @@ class Header extends StatelessWidget {
               ),
             ],
           ),
-          SvgPicture.asset(
-            'assets/bell-notification-svgrepo-com.svg',
-            height: 32,
+          GestureDetector(
+            onTap: onTap,
+            child: SvgPicture.asset(
+              'assets/bell-notification-svgrepo-com.svg',
+              height: 32,
+            ),
           ),
         ],
       ),
