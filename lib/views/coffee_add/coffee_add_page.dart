@@ -45,13 +45,21 @@ class _CoffeeAddPageState extends State<CoffeeAddPage> {
       builder: (context, state) {
         return Scaffold(
           backgroundColor: Colors.white,
-          appBar: AppBar(
-            title: const Text("Coffee Add"),
-          ),
           body: Stack(
             children: [
+
               ListView(
                 children: [
+                  const SizedBox(height: 10),
+                  const Center(
+                    child: Text(
+                      "Coffee Add",
+                      style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.blue),
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: GlobalTextField(

@@ -1,7 +1,3 @@
-import 'package:coffee_ecommerse/components/categories.dart';
-import 'package:coffee_ecommerse/components/home_header.dart';
-import 'package:coffee_ecommerse/components/product_card.dart';
-import 'package:coffee_ecommerse/components/special_card.dart';
 import 'package:coffee_ecommerse/theme.dart';
 import 'package:coffee_ecommerse/views/coffee_add/coffee_add_page.dart';
 import 'package:coffee_ecommerse/views/home_screen.dart';
