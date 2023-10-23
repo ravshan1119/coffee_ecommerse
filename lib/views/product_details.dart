@@ -8,12 +8,13 @@ class ProducDetailsScreen extends StatelessWidget {
       {Key? key,
       required this.name,
       required this.description,
-      required this.price})
+      required this.price, required this.id})
       : super(key: key);
 
   final String name;
   final String description;
   final double price;
+  final String id;
 
   @override
   Widget build(BuildContext context) {
@@ -117,8 +118,9 @@ class ProducDetailsScreen extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => OrderAddPage(
-                                    coffeeName: name,
-                                    coffeePrice: price.toString())));
+                                      coffeeName: name,
+                                      coffeePrice: price.toString(), id: id,
+                                    )));
                       },
                       price: price,
                     ),

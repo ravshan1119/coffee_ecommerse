@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:coffee_ecommerse/cubits/coffee_add/coffee_add_cubit.dart';
 import 'package:coffee_ecommerse/data/firebase/coffee_service.dart';
+import 'package:coffee_ecommerse/data/local_db/local_db.dart';
+import 'package:coffee_ecommerse/data/model/client_order_model.dart';
 import 'package:coffee_ecommerse/data/model/order_model.dart';
 import 'package:coffee_ecommerse/data/universal_data.dart';
 import 'package:coffee_ecommerse/utils/loading_dialog.dart';
@@ -13,9 +15,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 class OrderAddPage extends StatefulWidget {
-  const OrderAddPage({super.key, required this.coffeeName, required this.coffeePrice});
+  const OrderAddPage(
+      {super.key, required this.coffeeName, required this.coffeePrice, required this.id});
+
   final String coffeeName;
   final String coffeePrice;
+  final String id;
 
   @override
   State<OrderAddPage> createState() => _OrderAddPageState();
@@ -100,6 +105,12 @@ class _OrderAddPageState extends State<OrderAddPage> {
                           coffeeName: widget.coffeeName,
                         );
 
+                        ClientOrderModel clientOrder = ClientOrderModel(
+                          productName: widget.coffeeName,
+                          count: widget.coffeePrice,
+                          firebaseId: widget.id,
+                        );
+
                         showLoading(context: context);
                         UniversalData universalData = await coffeeService
                             .addOrder(orderModel: orderModel);
@@ -120,6 +131,7 @@ class _OrderAddPageState extends State<OrderAddPage> {
                                 .showSnackBar(snackBar);
                           }
                         }
+                        LocalDatabase.insertTodo(clientOrder);
                       } else {
                         const snackBar = SnackBar(
                           content: Text('The field is not full!'),
